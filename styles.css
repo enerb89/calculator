@@ -1,0 +1,51 @@
+body {
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  height: 100vw;
+  margin-top: 2rem;
+}
+
+.wrapper {
+  width: 70%;
+  padding-right: 1.1rem;
+}
+
+.buttons {
+  height: 500px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 0.2rem;
+}
+
+.numbers {
+  background-color: #fff;
+  font-size: 2rem;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+}
+
+#ergebnis {
+  text-align: right;
+  font-size: 2rem;
+  height: 3rem;
+}
+
+#zwischenergebnis {
+  text-align: right;
+  height: 2rem;
+}
+
+.endergebnis {
+  width: 30%;
+  border-left: solid 1px gray;
+  text-align: right;
+  padding: 1rem 2rem 0 0;
+  font-size: 3rem;
+}
+
+.liste {
+  overflow-y: auto;
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      let currentInput = 0;
+      let previousInput = 0;
+      let operator = "+";
+      let liste = "";
+
+      // Zahl ins Eingabefeld eingeben
+      function number(zahl) {
+        if (operator === "=") {
+          previousInput = 0;
+          currentInput = 0;
+          operator = "+";
+          updatePreviousInput();
+          updateCurrentInput();
+        }
+        //1 --> 1 * 10 = 10 + 1 ---> 11
+        console.log(currentInput);
+        currentInput = currentInput * 10 + zahl;
+        console.log(currentInput);
+        updateCurrentInput(currentInput);
+      }
+
+      // Zahlen sollen addiert werden
+      function add() {
+        performOperator();
+        operator = "+";
+        updatePreviousInput(previousInput + operator);
+      }
+
+      // Zahlen sollen subtraiert werden
+      function subtract() {
+        performOperator();
+        operator = "-";
+        updatePreviousInput(previousInput + operator);
+      }
+
+      // Zahlen sollen multipliziert werden
+      function multiply() {
+        performOperator();
+        operator = "*";
+        updatePreviousInput(previousInput + operator);
+      }
+
+      // Zahlen sollen geteilt werden
+      function divide() {
+        performOperator();
+        operator = "/";
+        updatePreviousInput(previousInput + operator);
+      }
+
+      // Summe soll ausgegeben werden
+      function enter() {
+        performOperator();
+        operator = "=";
+        updatePreviousInput(previousInput + operator);
+        updateCurrentInput(previousInput);
+      }
+
+      function performOperator() {
+        let currentResult = 0;
+        if (operator === "+") {
+          currentResult = previousInput + currentInput;
+        } else if (operator === "-") {
+          currentResult = previousInput - currentInput;
+        } else if (operator === "*") {
+          currentResult = previousInput * currentInput;
+        } else if (operator === "/") {
+          currentResult = previousInput / currentInput;
+        }
+        // previousInput  currentInput = currentResult
+        if (operator !== "=") {
+          let listString =
+            "<p>" +
+            previousInput +
+            operator +
+            currentInput +
+            "=" +
+            currentResult +
+            "</p>";
+          liste = listString + liste;
+          console.log(listString);
+          updateList();
+          // previous = 1, current = 1
+          previousInput = currentResult;
+        }
+        currentInput = 0;
+        updateCurrentInput(currentInput);
+      }
+
+      // Alles zurücksetzen
+      function clearCalculator() {
+        currentInput = 0;
+        previousInput = 0;
+        operator = "+";
+        liste = "";
+        updateCurrentInput("");
+        updatePreviousInput("");
+        updateList();
+      }
+
+      function updateCurrentInput(text) {
+        document.getElementById("ergebnis").innerHTML = text;
+      }
+
+      function updatePreviousInput(text) {
+        document.getElementById("zwischenergebnis").innerHTML = text;
+      }
+
+      function updateList() {
+        document.getElementById("liste").innerHTML = liste;
+      }
+    </script>
+    <title>Taschenrechner</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <div id="zwischenergebnis"></div>
+        <div id="ergebnis"></div>
+        <div class="buttons">
+          <button class="numbers" onclick="number(7)">7</button>
+          <button class="numbers" onclick="number(8)">8</button>
+          <button class="numbers" onclick="number(9)">9</button>
+          <button class="numbers" onclick="divide()">/</button>
+          <button class="numbers" onclick="number(4)">4</button>
+          <button class="numbers" onclick="number(5)">5</button>
+          <button class="numbers" onclick="number(6)">6</button>
+          <button class="numbers" onclick="multiply()">*</button>
+          <button class="numbers" onclick="number(1)">1</button>
+          <button class="numbers" onclick="number(2)">2</button>
+          <button class="numbers" onclick="number(3)">3</button>
+          <button class="numbers" onclick="subtract()">-</button>
+          <button class="numbers" onclick="clearCalculator()">CE</button>
+          <button class="numbers" onclick="number(0)">0</button>
+          <button class="numbers" onclick="enter('=')">=</button>
+          <button class="numbers" onclick="add()">+</button>
+        </div>
+      </div>
+      <div class="endergebnis" id="liste">
+        <p></p>
+        <p></p>
+        <p></p>
+      </div>
+    </div>
+  </body>
+</html>
